@@ -12,11 +12,7 @@ class AppCli {
   async createUser(email, password) {
     print(`Vos ID de création: ${email} ${password}`);
     bcrypt.hash(password, saltRounds, async (err, hash) => {
-      if (hash) {
-        await createAdmin(email, hash);
-      } else {
-        print(err);
-      }
+      hash ? await createAdmin(email, hash) : print(err);
     });
   }
   deleteUser() {}
